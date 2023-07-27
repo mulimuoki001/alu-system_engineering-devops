@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 # How to install nginx on a remote server and configure it
+
+cd /
+
 sudo apt update 
 sudo apt install nginx -y
 sudo touch /var/www/html/index.html
