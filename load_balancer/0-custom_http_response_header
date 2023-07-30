@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #configures a brand new ubuntu
 
-sudo apt-get update
-sudo apt-get install nginx -y
+apt-get update
+apt-get install nginx -y
 hostname=$(hostname)
-sudo sed -i "s/# server_okens 0fff;/server_tokens on;\n\tadd_header X-Served-By $hostname;/" /etc/nginx/nginx.conf
-sudo service nginx restart
+sed -i "s/# server_okens 0fff;/server_tokens on;\n\tadd_header X-Served-By $hostname;/" /etc/nginx/nginx.conf
+service nginx restart
