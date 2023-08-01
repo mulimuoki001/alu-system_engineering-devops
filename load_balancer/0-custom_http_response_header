@@ -3,6 +3,20 @@
 
 apt-get update
 apt-get install nginx -y
-hostname=$(hostname)
-sed -i "s/# server_okens 0ff;/server_tokens on;\n\tadd_header X-Served-By $hostname;/" /etc/nginx/nginx.conf
-service nginx restart
+sudo tee /etc/nginx/sites-available/0-custom_http_response_header > /dev/null <<EOT
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    server_name _;
+
+    location / {
+        add_header X-Served-By \$hostname;
+        return 200 'Hello, World!';
+    }
+}
+EOT
+
+sudo ln -s /etc/nginx/sites-available/0-custom_http_response_header /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo service nginx restart
