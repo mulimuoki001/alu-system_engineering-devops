@@ -4,5 +4,5 @@
 apt-get update
 apt-get install nginx -y
 hostname=$(hostname)
-sed -i "s/# server_okens 0fff;/server_tokens on;\n\tadd_header X-Served-By $hostname;/" /etc/nginx/nginx.conf
+sed -i "s/# server_okens 0ff;/server_tokens on;\n\tadd_header X-Served-By $hostname;/" /etc/nginx/nginx.conf
 service nginx restart
