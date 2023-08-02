@@ -1,22 +1,17 @@
 #!/usr/bin/env bash
-#configures a brand new ubuntu
-
-apt-get update
-apt-get install nginx -y
-sudo tee /etc/nginx/sites-available/0-custom_http_response_header > /dev/null <<EOT
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    server_name _;
-
-    location / {
-        add_header X-Served-By \$hostname;
-        return 200 'Hello, World!';
-    }
+#Installing Nginx and configuring it
+sudo apt update -y
+sudo apt install nginx -y
+new_config=\
+"server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+		root /var/www/html;
+	index index.html index.html index.nginx-debian.html;
+	server_name _;
+	add_header X-Served-By $HOSTNAME;
 }
-EOT
-
-sudo ln -s /etc/nginx/sites-available/0-custom_http_response_header /etc/nginx/sites-enabled/
-sudo nginx -t
+"
+sudo chown -R "$USER":"$USER" /etc/nginx/sites-available/default
+echo "$new_config" > /etc/nginx/sites-available/default
 sudo service nginx restart
