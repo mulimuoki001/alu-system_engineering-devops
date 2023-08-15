@@ -9,6 +9,7 @@ echo '<!DOCTYPE html>
     <h1>Hello Holberton</h1>
 </body>
 </html>' > index.html
+echo "Hello Holberton" > /var/www/html/index.html
 
 # Step 2: Create Dockerfile
 echo 'FROM httpd:latest
