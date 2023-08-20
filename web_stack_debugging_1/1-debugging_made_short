@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#fix nginx port 80
+# script of task 0 but using less lines
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-sudo service nginx restart
+service nginx restart
 kill "$(pgrep 'nginx' | head -1)"
